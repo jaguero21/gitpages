@@ -3,92 +3,518 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>James Aguero | Always Learning</title>
+  <title>James Aguero · iOS Developer</title>
+  <meta name="description" content="James Aguero — iOS developer in San Antonio, TX. Builder of CarpeCarb and Cadence. Swift, SwiftUI, HealthKit, and 18 years of building things that last.">
+  <meta property="og:title" content="James Aguero · iOS Developer">
+  <meta property="og:description" content="I build private, thoughtful iOS apps — from idea to App Store.">
+  <meta property="og:image" content="https://jaguero21.github.io/gitpages/assets/carpecarb-icon.png">
+  <meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="assets/carpecarb-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #f6f5f1;
+      --bg-elev: #ffffff;
+      --ink: #15171a;
+      --ink-2: #4a4f57;
+      --ink-3: #7b818a;
+      --line: rgb(21 23 26 / 0.09);
+      --accent: #0a84ff;
+      --sage: #6f9a6a;
+      --honey: #e6ae4a;
+      --terracotta: #d57d5f;
+      --teal: #1e8c96;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 12px 32px -12px rgb(0 0 0 / 0.12);
+      --radius: 22px;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, sans-serif;
+      --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0d10;
+        --bg-elev: #14171c;
+        --ink: #f2f3f5;
+        --ink-2: #b4b9c1;
+        --ink-3: #7f858f;
+        --line: rgb(255 255 255 / 0.08);
+        --accent: #3d9bff;
+        --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 16px 40px -16px rgb(0 0 0 / 0.6);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
-      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-      background: #f4f6fb;
-      color: #232323;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    header {
-      background: #377DFF;
-      color: #fff;
-      padding: 2rem 0 4rem 0;
-      text-align: center;
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      border-bottom: 1px solid var(--line);
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 0.05em;
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .brand { font-weight: 600; text-decoration: none; letter-spacing: -0.01em; }
+    .brand span { color: var(--ink-3); font-weight: 400; }
+    nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+    nav ul a { text-decoration: none; color: var(--ink-2); font-size: 15px; transition: color .2s; }
+    nav ul a:hover { color: var(--ink); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 96px 0 72px; position: relative; }
+    .hero::before {
+      content: ""; position: absolute; inset: -20% -10% auto auto; width: 720px; height: 720px;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--sage) 28%, transparent), transparent 70%),
+                  radial-gradient(closest-side at 30% 70%, color-mix(in srgb, var(--teal) 22%, transparent), transparent 70%);
+      filter: blur(20px); z-index: -1; pointer-events: none;
     }
-    header p {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      opacity: 0.95;
+    .hero .wrap { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 64px; align-items: center; }
+    .eyebrow {
+      font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--ink-3);
+      display: inline-flex; align-items: center; gap: 10px;
     }
-    .container {
-      max-width: 700px;
-      margin: -3rem auto 0 auto;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgb(0 0 0 / 6%);
-      padding: 2.5rem;
-      position: relative;
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #34c759; box-shadow: 0 0 0 4px rgb(52 199 89 / 0.18); }
+    h1 {
+      font-family: var(--display); font-weight: 700; letter-spacing: -0.035em;
+      font-size: clamp(44px, 7vw, 84px); line-height: 1.02; margin: 20px 0 24px;
     }
+    h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: var(--ink-2); }
+    .lede { font-size: clamp(18px, 2vw, 21px); color: var(--ink-2); max-width: 560px; margin: 0 0 36px; }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+      padding: 13px 20px; border-radius: 999px; font-weight: 500; font-size: 15px;
+      border: 1px solid var(--line); background: var(--bg-elev); color: var(--ink);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn.primary { background: var(--ink); color: var(--bg); border-color: transparent; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+
+    /* Phone mockup */
+    .phone {
+      justify-self: center; width: 280px; aspect-ratio: 9 / 19.5; border-radius: 48px; padding: 12px;
+      background: linear-gradient(145deg, #2a2d33, #0d0e10);
+      box-shadow: 0 0 0 2px #3a3d44 inset, 0 40px 80px -30px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(0 0 0 / 0.4);
+      transform: rotate(3deg);
+    }
+    .screen {
+      height: 100%; border-radius: 37px; overflow: hidden; position: relative;
+      background: #fbf7ef; color: #2c3a2a; padding: 54px 18px 18px; font-size: 13px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 92px; height: 27px; border-radius: 20px; background: #000; }
+    .s-head { display: flex; justify-content: space-between; align-items: center; }
+    .s-head b { font-size: 22px; letter-spacing: -0.02em; }
+    .s-head img { width: 30px; height: 30px; border-radius: 8px; }
+    .ring-card { background: #fff; border-radius: 18px; padding: 16px; box-shadow: 0 2px 10px rgb(60 80 50 / 0.08); }
+    .ring-row { display: flex; align-items: baseline; justify-content: space-between; }
+    .ring-row strong { font-size: 30px; letter-spacing: -0.03em; }
+    .ring-row small { color: #8a927f; }
+    .bar { height: 10px; border-radius: 99px; background: #ece6d8; margin-top: 10px; overflow: hidden; }
+    .bar i { display: block; height: 100%; width: 68%; border-radius: inherit; background: linear-gradient(90deg, var(--sage), var(--honey)); animation: fill 1.6s cubic-bezier(.2,.8,.2,1) both .4s; }
+    @keyframes fill { from { width: 0; } }
+    .input { background: #fff; border-radius: 14px; padding: 11px 14px; color: #a39c8c; box-shadow: 0 2px 10px rgb(60 80 50 / 0.06); }
+    .input::after { content: "|"; color: var(--sage); animation: blink 1s steps(1) infinite; margin-left: 2px; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .food { display: flex; justify-content: space-between; align-items: center; background: #fff; border-radius: 14px; padding: 10px 14px; }
+    .food span { display: flex; align-items: center; gap: 8px; }
+    .food span::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--sage)); }
+    .food b { font-weight: 600; }
+    .tabbar { margin-top: auto; display: flex; justify-content: space-around; padding: 12px 8px 4px; border-top: 1px solid #ece6d8; }
+    .tabbar i { width: 22px; height: 22px; border-radius: 7px; background: #ddd6c6; }
+    .tabbar i.on { background: var(--sage); }
+
+    /* ---------- Sections ---------- */
+    section { padding: 88px 0; }
+    .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+    .sec-head p { margin: 0; color: var(--ink-3); max-width: 420px; }
     h2 {
-      margin-top: 2rem;
-      color: #377DFF;
-      font-size: 1.6rem;
+      font-family: var(--display); font-weight: 700; letter-spacing: -0.03em;
+      font-size: clamp(32px, 4.4vw, 48px); line-height: 1.05; margin: 8px 0 0;
     }
-    a {
-      color: #377DFF;
-      text-decoration: none;
-      transition: color 0.2s;
+    h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+    /* Featured apps */
+    .apps { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .app {
+      background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 32px; display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
     }
-    a:hover {
-      color: #244E94;
+    .app:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .app::after {
+      content: ""; position: absolute; right: -80px; top: -80px; width: 240px; height: 240px; border-radius: 50%;
+      background: var(--glow); opacity: 0.16; filter: blur(30px); pointer-events: none;
     }
-    footer {
-      margin: 3rem 0 2rem 0;
-      text-align: center;
-      font-size: 0.97rem;
-      color: #8b949e;
+    .app-top { display: flex; align-items: center; gap: 16px; }
+    .app-top img { width: 72px; height: 72px; border-radius: 17px; box-shadow: 0 6px 18px -6px rgb(0 0 0 / 0.35); }
+    .app h3 { margin: 0; font-size: 24px; letter-spacing: -0.02em; }
+    .app .sub { color: var(--ink-3); font-size: 15px; }
+    .badge {
+      font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.03em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; width: fit-content;
     }
-    @media (max-width: 768px) {
-      .container {
-        padding: 1rem;
-      }
-      header {
-        padding: 1.5rem 0 3rem 0;
-      }
+    .badge.live { background: rgb(52 199 89 / 0.14); color: #23963f; }
+    .badge.dev { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+    @media (prefers-color-scheme: dark) { .badge.live { color: #4cd964; } }
+    .app p { margin: 0; color: var(--ink-2); }
+    .app ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 15px; color: var(--ink-2); }
+    .app li { display: flex; gap: 10px; }
+    .app li::before { content: "→"; color: var(--ink-3); }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+    .tag { font-family: var(--mono); font-size: 12px; padding: 5px 10px; border-radius: 8px; background: color-mix(in srgb, var(--ink) 6%, transparent); color: var(--ink-2); }
+    .links { display: flex; flex-wrap: wrap; gap: 16px; font-size: 15px; font-weight: 500; }
+    .links a { text-decoration: none; color: var(--accent); }
+    .links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Other projects */
+    .more { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+    .mini {
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 28px;
+      display: flex; gap: 18px; align-items: flex-start; text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    a.mini:hover { background: var(--bg-elev); border-color: color-mix(in srgb, var(--ink) 18%, transparent); }
+    .glyph {
+      flex: none; width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center;
+      background: var(--g); color: #fff;
+    }
+    .glyph svg { width: 24px; height: 24px; }
+    .mini h4 { margin: 0 0 4px; font-size: 18px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .mini p { margin: 0 0 12px; color: var(--ink-2); font-size: 15px; }
+
+    /* Stack */
+    .stack { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .stack div { background: var(--bg); padding: 24px; }
+    .stack h5 { margin: 0 0 10px; font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+    .stack p { margin: 0; font-size: 15px; color: var(--ink-2); line-height: 1.75; }
+
+    /* About */
+    .about { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
+    .about-copy p { color: var(--ink-2); margin: 0 0 18px; font-size: 18px; }
+    .about-copy p:first-child { font-size: 22px; color: var(--ink); letter-spacing: -0.01em; line-height: 1.45; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    .fact { border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; }
+    .fact b { display: block; font-family: var(--display); font-size: 34px; letter-spacing: -0.03em; line-height: 1.1; }
+    .fact span { color: var(--ink-3); font-size: 14px; }
+
+    /* Hobbies */
+    .hobbies { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .hobby { border-radius: var(--radius); padding: 32px; background: var(--bg-elev); border: 1px solid var(--line); }
+    .hobby .glyph { margin-bottom: 20px; }
+    .hobby h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -0.02em; }
+    .hobby p { margin: 0; color: var(--ink-2); }
+    .term {
+      margin-top: 20px; font-family: var(--mono); font-size: 13px; line-height: 1.7;
+      background: #0d1014; color: #c7ccd4; border-radius: 12px; padding: 14px 16px; overflow-x: auto;
+    }
+    .term .p { color: #6fd08c; }
+    .term .c { color: #6b7380; }
+
+    /* Contact */
+    .contact {
+      text-align: center; border-radius: 32px; padding: 72px 24px; margin: 0 0 40px;
+      background:
+        radial-gradient(600px 300px at 20% 0%, color-mix(in srgb, var(--sage) 30%, transparent), transparent),
+        radial-gradient(600px 300px at 80% 100%, color-mix(in srgb, var(--teal) 30%, transparent), transparent),
+        var(--bg-elev);
+      border: 1px solid var(--line);
+    }
+    .contact h2 { margin-bottom: 14px; }
+    .contact p { color: var(--ink-2); margin: 0 auto 32px; max-width: 480px; }
+    .contact .ctas { justify-content: center; }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--ink-3); font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .bar i, .input::after { animation: none; }
+      .phone { transform: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .hero { padding: 56px 0 40px; }
+      .hero .wrap, .about { grid-template-columns: 1fr; gap: 48px; }
+      .apps, .more, .hobbies { grid-template-columns: 1fr; }
+      .stack { grid-template-columns: 1fr 1fr; }
+      nav ul { display: none; }
+      section { padding: 64px 0; }
+    }
+    @media (max-width: 520px) {
+      .wrap { padding: 0 16px; }
+      .app, .hobby { padding: 24px; }
+      .stack { grid-template-columns: 1fr; }
+      .phone { width: 240px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>James A. </h1>
-    <p>Welcome to my modern GitHub Pages site 👋</p>
+
+  <nav>
+    <div class="wrap">
+      <a class="brand" href="#top">James Aguero <span>· iOS</span></a>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#life">Off the clock</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow"><i class="dot"></i>iOS Developer · San Antonio, TX</span>
+        <h1>I build apps that<br><em>respect the people</em><br>who use them.</h1>
+        <p class="lede">
+          Swift &amp; SwiftUI developer shipping private, on-device health apps — from first sketch to the App Store.
+          Before code, I spent 18 years running construction crews.
+        </p>
+        <div class="ctas">
+          <a class="btn primary" href="https://apps.apple.com/us/app/carpecarb/id6759311106" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.02-1.5-2.62-1.7-3.19-1.72-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.88-.76-1.48.02-2.85.86-3.61 2.19-1.54 2.67-.39 6.62 1.11 8.79.73 1.06 1.6 2.25 2.75 2.2 1.1-.04 1.52-.71 2.85-.71s1.71.71 2.87.69c1.19-.02 1.94-1.08 2.66-2.14.84-1.23 1.19-2.42 1.21-2.48-.03-.01-2.32-.89-2.34-3.53zM14.18 6.1c.61-.74 1.02-1.76.91-2.78-.88.04-1.94.59-2.57 1.32-.56.65-1.06 1.69-.93 2.69.98.08 1.98-.5 2.59-1.23z"/></svg>
+            CarpeCarb on the App Store
+          </a>
+          <a class="btn" href="https://linkedin.com/in/james-aguero-28381b223" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="https://github.com/jaguero21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="s-head"><b>Today</b><img src="assets/carpecarb-icon.png" alt=""></div>
+          <div class="ring-card">
+            <div class="ring-row"><strong>82g</strong><small>of 120g</small></div>
+            <div class="bar"><i></i></div>
+          </div>
+          <div class="input">two tacos and a horchata</div>
+          <div class="food" style="--c: var(--honey)"><span>Oatmeal &amp; berries</span><b>34g</b></div>
+          <div class="food" style="--c: var(--terracotta)"><span>Chicken burrito bowl</span><b>41g</b></div>
+          <div class="food"><span>Apple</span><b>7g</b></div>
+          <div class="tabbar"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
   </header>
-  <div class="container">
-    <h2>About Me</h2>
-    <p>
-      As I begin my journey as a full stack developer, I bring with me 18 years of hands-on experience as a construction foreman. My background in construction has taught me the value of teamwork, problem-solving, and seeing projects through from blueprint to completion. Now, I’m excited to apply those same principles to the world of software development. I am proficient in Python and HTML, and I’ve been working with Linux systems since 2003, giving me a solid foundation in both programming and operating systems. I look forward to leveraging my diverse skill set to build innovative solutions and collaborate with teams in my new tech career.
-      
-    </p>
-    <h2>Contact</h2>
-    <p>
-      <a href="mailto:james.aguero@gmail.com">Email</a>
-    </p>
-    <h2>Projects</h2>
-    <ul>
-      <li><a href="#">Project One</a></li>
-      <li><a href="#">Project Two</a></li>
-      <li><a href="#">Project Three</a></li>
-    </ul>
-  </div>
+
+  <main>
+    <section id="work">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div>
+            <span class="eyebrow">01 — Selected work</span>
+            <h2>Apps I've <em>shipped</em> &amp; am building.</h2>
+          </div>
+          <p>Native iOS, privacy-first, deeply integrated with Apple Health, Siri and widgets.</p>
+        </div>
+
+        <div class="apps">
+          <article class="app reveal" style="--glow: var(--sage)">
+            <div class="app-top">
+              <img src="assets/carpecarb-icon.png" alt="CarpeCarb app icon" width="72" height="72">
+              <div>
+                <span class="badge live">● Live on the App Store</span>
+                <h3>CarpeCarb</h3>
+                <div class="sub">AI-powered carb tracking</div>
+              </div>
+            </div>
+            <p>Type what you ate in plain language — “two tacos and a horchata” — and get instant carb counts with cited sources. No database searching.</p>
+            <ul>
+              <li>Natural-language lookup via a Firebase proxy; API keys never touch the client</li>
+              <li>Two-way Apple Health sync with 30-day history</li>
+              <li>Siri App Intents and a Home Screen widget sharing data via App Groups</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Flutter</span><span class="tag">Swift</span><span class="tag">HealthKit</span><span class="tag">App Intents</span><span class="tag">WidgetKit</span><span class="tag">Firebase</span>
+            </div>
+            <div class="links">
+              <a href="https://apps.apple.com/us/app/carpecarb/id6759311106" target="_blank" rel="noopener">App Store ↗</a>
+              <a href="https://jaguero21.github.io/CarpeCarb/" target="_blank" rel="noopener">Website ↗</a>
+              <a href="https://github.com/jaguero21/CarpeCarb" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </article>
+
+          <article class="app reveal" style="--glow: var(--teal)">
+            <div class="app-top">
+              <img src="assets/cadence-icon.png" alt="Cadence app icon" width="72" height="72">
+              <div>
+                <span class="badge dev">◐ In development</span>
+                <h3>Cadence</h3>
+                <div class="sub">Private daily health log</div>
+              </div>
+            </div>
+            <p>A two-minute daily check-in for people managing chronic conditions. An on-device pattern engine surfaces what's driving your symptoms, then exports a doctor-ready PDF.</p>
+            <ul>
+              <li>No servers, accounts or analytics — SwiftData + your own private CloudKit</li>
+              <li>On-device Week Reflection with Apple Foundation Models (iOS 26)</li>
+              <li>iPhone, iPad, Apple Watch, widgets, Siri; English &amp; Spanish, full VoiceOver</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Swift 6</span><span class="tag">SwiftUI</span><span class="tag">SwiftData</span><span class="tag">CloudKit</span><span class="tag">Foundation Models</span><span class="tag">StoreKit 2</span><span class="tag">watchOS</span>
+            </div>
+            <div class="links">
+              <a href="https://jaguero21.github.io/Cadence/" target="_blank" rel="noopener">Website ↗</a>
+              <a href="https://github.com/jaguero21/Cadence" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="more">
+          <div class="mini reveal">
+            <div class="glyph" style="--g: linear-gradient(135deg, #8e5cf7, #e0569b)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+            </div>
+            <div>
+              <h4>EQApp <span class="badge dev">macOS · WIP</span></h4>
+              <p>A menu-bar, system-wide equalizer for macOS built on Core Audio process taps.</p>
+              <div class="tags"><span class="tag">Swift</span><span class="tag">Core Audio</span><span class="tag">AppKit</span></div>
+            </div>
+          </div>
+          <a class="mini reveal" href="https://github.com/jaguero21/.files" target="_blank" rel="noopener">
+            <div class="glyph" style="--g: linear-gradient(135deg, #2b3138, #4a5560)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 17 6-5-6-5M12 19h8"/></svg>
+            </div>
+            <div>
+              <h4>.files ↗</h4>
+              <p>My macOS dev environment as code — Neovim (LazyVim), Zsh, tmux, Git, Zed and Zellij, wired up with one setup script.</p>
+              <div class="tags"><span class="tag">Shell</span><span class="tag">Neovim</span><span class="tag">tmux</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" style="padding-top: 0">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div>
+            <span class="eyebrow">02 — Toolbox</span>
+            <h2>What I build <em>with</em>.</h2>
+          </div>
+        </div>
+        <div class="stack reveal">
+          <div><h5>Languages</h5><p>Swift 6<br>Dart / Flutter<br>Python<br>JavaScript (Node)</p></div>
+          <div><h5>Apple frameworks</h5><p>SwiftUI · SwiftData<br>HealthKit · CloudKit<br>WidgetKit · App Intents<br>StoreKit 2 · Swift Charts</p></div>
+          <div><h5>Backend &amp; AI</h5><p>Firebase Cloud Functions<br>Google Cloud Secret Manager<br>Apple Foundation Models<br>Perplexity API</p></div>
+          <div><h5>Workflow</h5><p>Xcode · Neovim<br>Git · GitHub Actions<br>App Store Connect<br>Linux since 2003</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap about">
+        <div class="reveal">
+          <span class="eyebrow">03 — About</span>
+          <h2>From blueprints<br>to <em>builds</em>.</h2>
+          <div class="facts">
+            <div class="fact"><b>18 yrs</b><span>Construction foreman</span></div>
+            <div class="fact"><b>2003</b><span>First Linux install</span></div>
+            <div class="fact"><b>1</b><span>App live on the App Store</span></div>
+            <div class="fact"><b>4</b><span>Apple platforms built for</span></div>
+          </div>
+        </div>
+        <div class="about-copy reveal">
+          <p>I spent 18 years as a construction foreman — reading plans, leading crews, and getting projects from blueprint to handover on time and on budget.</p>
+          <p>That work taught me what good software needs too: a clear plan, attention to the details nobody sees, and respect for the people who'll live with the result. I've been tinkering with Linux since 2003, and when I moved into software full-time, iOS is where it clicked.</p>
+          <p>Today I design and ship native apps end to end — architecture, UI, App Store submission, privacy policies and all. My focus is health apps that keep personal data on the device, where it belongs.</p>
+          <p>I'm open to iOS roles and freelance work. If you're building something people should be able to trust, let's talk.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="life" style="padding-top: 0">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div>
+            <span class="eyebrow">04 — Off the clock</span>
+            <h2>When I'm not <em>in Xcode</em>.</h2>
+          </div>
+        </div>
+        <div class="hobbies">
+          <article class="hobby reveal">
+            <div class="glyph" style="--g: linear-gradient(135deg, #2b3138, #4a5560)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 6.5h.01M6 17.5h.01"/></svg>
+            </div>
+            <h3>Tinkering &amp; homelab</h3>
+            <p>Two decades of breaking and fixing Linux boxes. I'm constantly tuning my terminal setup and seeing how far a keyboard-driven workflow can go.</p>
+            <div class="term"><span class="p">~ ❯</span> git clone github.com/jaguero21/.files<br><span class="p">~ ❯</span> ./setup.sh <span class="c"># and we're home</span></div>
+          </article>
+          <article class="hobby reveal">
+            <div class="glyph" style="--g: linear-gradient(135deg, #34c759, #1e8c96)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <h3>Fitness &amp; health</h3>
+            <p>Staying active and paying attention to what I eat is a big part of my life — and it shows up in what I build. Both CarpeCarb and Cadence come from the same place: making it easier to understand your own health.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" style="padding-bottom: 0">
+      <div class="wrap">
+        <div class="contact reveal">
+          <span class="eyebrow">05 — Contact</span>
+          <h2>Let's build <em>something</em>.</h2>
+          <p>Hiring for iOS, need an app built, or just want to talk SwiftUI? My inbox is open.</p>
+          <div class="ctas">
+            <a class="btn primary" href="mailto:james.aguero@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              james.aguero@gmail.com
+            </a>
+            <a class="btn" href="https://linkedin.com/in/james-aguero-28381b223" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="btn" href="https://github.com/jaguero21" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer>
-    &copy; 2025 James A. Powered by GitHub Pages.
+    <div class="wrap">
+      <span>© <span id="year">2026</span> James Aguero · San Antonio, TX</span>
+      <span>Hand-built, no frameworks. Hosted on GitHub Pages.</span>
+    </div>
   </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
 </body>
 </html>
