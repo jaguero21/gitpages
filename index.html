@@ -196,14 +196,35 @@
     .fact span { color: var(--ink-3); font-size: 14px; }
 
     /* Hobbies */
-    .hobbies { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .hobbies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .hobby { border-radius: var(--radius); padding: 32px; background: var(--bg-elev); border: 1px solid var(--line); }
+    .hobby.wide { grid-column: span 2; }
+    .hobby.full { grid-column: 1 / -1; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+    .hobby.full .glyph { margin: 0; }
+    .hobby.full > div:nth-child(2) { flex: 1 1 320px; }
+    .hobby.dad {
+      background:
+        radial-gradient(420px 220px at 100% 0%, color-mix(in srgb, var(--terracotta) 22%, transparent), transparent),
+        radial-gradient(360px 200px at 0% 100%, color-mix(in srgb, var(--honey) 18%, transparent), transparent),
+        var(--bg-elev);
+    }
+    .hobby.dad h3 { font-size: 30px; }
+    .hobby.dad p { font-size: 19px; max-width: 520px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+    .eq { display: flex; align-items: end; gap: 4px; height: 36px; margin-top: 20px; }
+    .eq i { width: 6px; border-radius: 3px; background: linear-gradient(var(--honey), var(--terracotta)); animation: eq 1.1s ease-in-out infinite alternate; }
+    .eq i:nth-child(1) { height: 40%; animation-delay: -.2s; } .eq i:nth-child(2) { height: 85%; animation-delay: -.7s; }
+    .eq i:nth-child(3) { height: 55%; animation-delay: -.4s; } .eq i:nth-child(4) { height: 100%; animation-delay: -.9s; }
+    .eq i:nth-child(5) { height: 35%; animation-delay: -.1s; } .eq i:nth-child(6) { height: 70%; animation-delay: -.6s; }
+    .eq i:nth-child(7) { height: 50%; animation-delay: -.3s; } .eq i:nth-child(8) { height: 90%; animation-delay: -.8s; }
+    @keyframes eq { to { transform: scaleY(.3); } }
+    .eq i { transform-origin: bottom; }
     .hobby .glyph { margin-bottom: 20px; }
     .hobby h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -0.02em; }
     .hobby p { margin: 0; color: var(--ink-2); }
     .term {
       margin-top: 20px; font-family: var(--mono); font-size: 13px; line-height: 1.7;
-      background: #0d1014; color: #c7ccd4; border-radius: 12px; padding: 14px 16px; overflow-x: auto;
+      background: #0d1014; color: #c7ccd4; border-radius: 12px; padding: 14px 16px; overflow-x: auto; white-space: nowrap;
     }
     .term .p { color: #6fd08c; }
     .term .c { color: #6b7380; }
@@ -229,6 +250,7 @@
     .reveal.in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
+      .eq i { animation: none; }
       .phone { transform: none; }
       html { scroll-behavior: auto; }
     }
@@ -237,7 +259,8 @@
     @media (max-width: 900px) {
       .hero { padding: 56px 0 40px; }
       .hero .wrap, .about { grid-template-columns: 1fr; gap: 48px; }
-      .apps, .more, .hobbies { grid-template-columns: 1fr; }
+      .apps, .more { grid-template-columns: 1fr; }
+      .hobbies { grid-template-columns: 1fr 1fr; }
       .stack { grid-template-columns: 1fr 1fr; }
       nav ul { display: none; }
       section { padding: 64px 0; }
@@ -246,6 +269,10 @@
       .wrap { padding: 0 16px; }
       .app, .hobby { padding: 24px; }
       .stack { grid-template-columns: 1fr; }
+      .hobbies { grid-template-columns: 1fr; }
+      .hobby.wide { grid-column: auto; }
+      .hobby.dad h3 { font-size: 24px; }
+      .hobby.dad p { font-size: 17px; }
       .phone { width: 240px; }
     }
   </style>
@@ -432,20 +459,52 @@
           </div>
         </div>
         <div class="hobbies">
+          <article class="hobby wide dad reveal">
+            <div class="glyph" style="--g: linear-gradient(135deg, #e6ae4a, #d57d5f)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+            <h3>Being Dad</h3>
+            <p>My most important job: dad to an awesome daughter who's now a junior in high school. Nothing I ship will ever top that.</p>
+          </article>
+          <article class="hobby reveal">
+            <div class="glyph" style="--g: linear-gradient(135deg, #8e5cf7, #e0569b)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
+            </div>
+            <h3>Music</h3>
+            <p>Classic hip-hop is home base, but I'll put on just about any genre. There's always something playing while I code.</p>
+            <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="hobby reveal">
+            <div class="glyph" style="--g: linear-gradient(135deg, #6f9a6a, #1e8c96)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3>Reading &amp; BookPi</h3>
+            <p>I read a lot, and my library lives on BookPi: a home book server I built on a Raspberry Pi running NixOS.</p>
+            <div class="chips"><span class="tag">NixOS</span><span class="tag">Raspberry Pi</span><span class="tag">Self-hosted</span></div>
+          </article>
           <article class="hobby reveal">
             <div class="glyph" style="--g: linear-gradient(135deg, #2b3138, #4a5560)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 6.5h.01M6 17.5h.01"/></svg>
             </div>
             <h3>Tinkering &amp; homelab</h3>
             <p>Two decades of breaking and fixing Linux boxes. I'm constantly tuning my terminal setup and seeing how far a keyboard-driven workflow can go.</p>
-            <div class="term"><span class="p">~ ❯</span> git clone github.com/jaguero21/.files<br><span class="p">~ ❯</span> ./setup.sh <span class="c"># and we're home</span></div>
+            <div class="term"><span class="p">~ ❯</span> gh repo clone jaguero21/.files<br><span class="p">~ ❯</span> ./setup.sh <span class="c"># home</span></div>
           </article>
           <article class="hobby reveal">
             <div class="glyph" style="--g: linear-gradient(135deg, #34c759, #1e8c96)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
             </div>
             <h3>Fitness &amp; health</h3>
-            <p>Staying active and paying attention to what I eat is a big part of my life — and it shows up in what I build. Both CarpeCarb and Cadence come from the same place: making it easier to understand your own health.</p>
+            <p>Staying active and paying attention to what I eat is a big part of my life, and it shows up in what I build. CarpeCarb and Cadence both make it easier to understand your own health.</p>
+          </article>
+          <article class="hobby full reveal">
+            <div class="glyph" style="--g: linear-gradient(135deg, #0a84ff, #5e5ce6)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></svg>
+            </div>
+            <div>
+              <h3>Always learning</h3>
+              <p>Going from job sites to the App Store taught me there's always a next thing to learn, and I'm usually in the middle of it.</p>
+            </div>
           </article>
         </div>
       </div>
