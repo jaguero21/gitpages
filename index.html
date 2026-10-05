@@ -111,37 +111,15 @@
 
     /* Phone mockup */
     .phone {
-      justify-self: center; width: 280px; aspect-ratio: 9 / 19.5; border-radius: 48px; padding: 12px;
+      justify-self: center; width: 280px; aspect-ratio: 9 / 18.5; border-radius: 48px; padding: 12px;
       background: linear-gradient(145deg, #2a2d33, #0d0e10);
       box-shadow: 0 0 0 2px #3a3d44 inset, 0 40px 80px -30px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(0 0 0 / 0.4);
       transform: rotate(3deg);
     }
-    .screen {
-      height: 100%; border-radius: 37px; overflow: hidden; position: relative;
-      background: #fbf7ef; color: #2c3a2a; padding: 54px 18px 18px; font-size: 13px;
-      display: flex; flex-direction: column; gap: 12px;
-    }
-    .island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 92px; height: 27px; border-radius: 20px; background: #000; }
-    .s-head { display: flex; justify-content: space-between; align-items: center; }
-    .s-head b { font-size: 22px; letter-spacing: -0.02em; }
-    .s-head img { width: 30px; height: 30px; border-radius: 8px; }
-    .ring-card { background: #fff; border-radius: 18px; padding: 16px; box-shadow: 0 2px 10px rgb(60 80 50 / 0.08); }
-    .ring-row { display: flex; align-items: baseline; justify-content: space-between; }
-    .ring-row strong { font-size: 30px; letter-spacing: -0.03em; }
-    .ring-row small { color: #8a927f; }
-    .bar { height: 10px; border-radius: 99px; background: #ece6d8; margin-top: 10px; overflow: hidden; }
-    .bar i { display: block; height: 100%; width: 68%; border-radius: inherit; background: linear-gradient(90deg, var(--sage), var(--honey)); animation: fill 1.6s cubic-bezier(.2,.8,.2,1) both .4s; }
-    @keyframes fill { from { width: 0; } }
-    .input { background: #fff; border-radius: 14px; padding: 11px 14px; color: #a39c8c; box-shadow: 0 2px 10px rgb(60 80 50 / 0.06); }
-    .input::after { content: "|"; color: var(--sage); animation: blink 1s steps(1) infinite; margin-left: 2px; }
-    @keyframes blink { 50% { opacity: 0; } }
-    .food { display: flex; justify-content: space-between; align-items: center; background: #fff; border-radius: 14px; padding: 10px 14px; }
-    .food span { display: flex; align-items: center; gap: 8px; }
-    .food span::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--sage)); }
-    .food b { font-weight: 600; }
-    .tabbar { margin-top: auto; display: flex; justify-content: space-around; padding: 12px 8px 4px; border-top: 1px solid #ece6d8; }
-    .tabbar i { width: 22px; height: 22px; border-radius: 7px; background: #ddd6c6; }
-    .tabbar i.on { background: var(--sage); }
+    .screen { height: 100%; border-radius: 37px; overflow: hidden; position: relative; background: #f3f0ea; }
+    .screen img { width: 100%; height: auto; }
+    .screen::after { content: ""; position: absolute; inset: auto 0 0; height: 90px; background: linear-gradient(transparent, #f3f0ea 75%); }
+    .island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 82px; height: 24px; border-radius: 20px; background: #000; }
 
     /* ---------- Sections ---------- */
     section { padding: 88px 0; }
@@ -251,7 +229,6 @@
     .reveal.in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
-      .bar i, .input::after { animation: none; }
       .phone { transform: none; }
       html { scroll-behavior: auto; }
     }
@@ -312,19 +289,10 @@
         </div>
       </div>
 
-      <div class="phone" aria-hidden="true">
+      <div class="phone">
         <div class="screen">
+          <img src="assets/carpecarb-home.jpg" alt="CarpeCarb home screen showing 155g of a 180g daily carb goal, macros, and today's food log" width="603" height="1260">
           <div class="island"></div>
-          <div class="s-head"><b>Today</b><img src="assets/carpecarb-icon.png" alt=""></div>
-          <div class="ring-card">
-            <div class="ring-row"><strong>82g</strong><small>of 120g</small></div>
-            <div class="bar"><i></i></div>
-          </div>
-          <div class="input">two tacos and a horchata</div>
-          <div class="food" style="--c: var(--honey)"><span>Oatmeal &amp; berries</span><b>34g</b></div>
-          <div class="food" style="--c: var(--terracotta)"><span>Chicken burrito bowl</span><b>41g</b></div>
-          <div class="food"><span>Apple</span><b>7g</b></div>
-          <div class="tabbar"><i class="on"></i><i></i><i></i><i></i></div>
         </div>
       </div>
     </div>
